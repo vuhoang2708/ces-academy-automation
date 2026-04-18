@@ -31,7 +31,7 @@ Bộ công cụ tự động hóa toàn diện giúp trích xuất tài liệu, 
 - **Thư viện:** `pyautogui`, `opencv-python`, `img2pdf`, `mss`, `pygetwindow`, `websockets`, `requests`.
 
 ## ⚙️ Cấu hình GitHub
-Toàn bộ mã nguồn được duy trì tại repository: `vuhoang2708/antigravity-sync-data`.
+Toàn bộ mã nguồn được duy trì tại repository: `vuhoang2708/ces-academy-automation`.
 
 ---
 *📍 Được cập nhật ngày 18/04/2026 bởi Antigravity Agent.*
