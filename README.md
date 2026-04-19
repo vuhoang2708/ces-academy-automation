@@ -2,27 +2,19 @@
 
 Bộ công cụ tự động hóa toàn diện giúp trích xuất tài liệu, chụp ảnh màn hình và tải Media từ các nền tảng SharePoint, Zalo và Facebook.
 
-## 📋 Tổng quan các phiên bản (Versions)
+## 📁 Cấu trúc thư mục (New Structure)
 
-### 🚀 Project V13 - Media Downloader Engine (Current)
-*   **Mục tiêu:** Tải tập tin và hình ảnh gốc thay vì chỉ chụp ảnh màn hình.
-*   **Zalo Desktop:** Sử dụng **OpenCV** để nhận diện Icon "Tải về" và tự động click. 
-    *   *Script:* `Project_V12_Desktop_Capture/v13_zalo_media_downloader.py`
-*   **Facebook Group:** Sử dụng kỹ thuật **CDP (Chrome DevTools Protocol)** để trích xuất Media từ Group kín mà không cần API.
-    *   *Script:* `Project_V12_Desktop_Capture/v13_fb_media_downloader.py`
+### 🚀 [Project V13 - Media Downloader Engine](Project_V13_Media_Downloader/)
+*   Tải tập tin và hình ảnh gốc từ Zalo (OpenCV) và Facebook (CDP).
+*   *Tài liệu:* `Project_V13_Media_Downloader/TECHNICAL_SPEC_V13.md`
 
-### 📸 Project V12 - Zalo Screenshot Pro
-*   **Mục tiêu:** Chụp trọn vẹn lịch sử hội thoại Zalo Desktop thành file PDF siêu sạch.
-*   **Tính năng:** 
-    *   Tự động cuộn bằng phím điều hướng (Arrow Down).
-    *   Cảm biến "Mắt thần" (Image Comparison) để nhận diện điểm dừng hội thoại.
-    *   Crop ảnh siêu sát để loại bỏ Menu và Header của Zalo.
-*   *Script:* `Project_V12_Desktop_Capture/capture_v12_zalo_pro.py`
+### 📸 [Project V12 - Zalo Screenshot Pro](Project_V12_Zalo_Screenshot/)
+*   Chụp ảnh màn hình hội thoại Zalo sạch, ghép PDF tự động.
+*   *Script:* `Project_V12_Zalo_Screenshot/capture_v12_zalo_pro.py`
 
-### 📂 Project V11 - SharePoint PDF Extractor
-*   **Mục tiêu:** Trích xuất nội dung từ trình xem PDF của Microsoft SharePoint/Teams.
-*   **Tính năng:** Điều khiển trình duyệt để cuộn và chụp từng trang tài liệu, sau đó đóng gói thành PDF duy nhất.
-*   *Script:* `capture_v11_sharepoint.py`
+### 📂 [Project V11 - SharePoint PDF Extractor](Project_V11_SharePoint_Capture/)
+*   Trích xuất tài liệu PDF từ Microsoft SharePoint/Teams.
+*   *Script:* `Project_V11_SharePoint_Capture/capture_v11_sharepoint.py`
 
 ---
 
@@ -34,4 +26,4 @@ Bộ công cụ tự động hóa toàn diện giúp trích xuất tài liệu, 
 Toàn bộ mã nguồn được duy trì tại repository: `vuhoang2708/ces-academy-automation`.
 
 ---
-*📍 Được cập nhật ngày 18/04/2026 bởi Antigravity Agent.*
+*📍 Re-organized on 19/04/2026 for better workspace management.*

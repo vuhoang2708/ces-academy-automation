@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Automation Tmp Files
+*.png
+*.jpg
+*.pdf
+zalo_pro_captures/
+v12_captures/
+v13_fb_downloads/
+screenshots/
+antigravity_export/
+
+# Sensitive Data
+cookies.json
+
+# IDE
+.vscode/
+.idea/
+.gemini/
+.antigravity/
+
+# Others
+Lam_chu_ANTIGRAVITY_trong_30_ngay_CHuan_81_Trang.pdf
