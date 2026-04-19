@@ -1,5 +1,8 @@
 # CES Academy Automation Suite
 
+> [!IMPORTANT]
+> **[MASTER SPECIFICATION](./MASTER_SPECIFICATION.md)**: Xem toàn bộ kiến trúc giải pháp và khung kỹ thuật tổng quát tại đây.
+
 Bộ công cụ tự động hóa toàn diện giúp trích xuất tài liệu, chụp ảnh màn hình và tải Media từ các nền tảng SharePoint, Zalo và Facebook.
 
 ## 📁 Cấu trúc thư mục (New Structure)
