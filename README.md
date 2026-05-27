@@ -29,6 +29,7 @@ Bộ công cụ tự động hóa toàn diện giúp trích xuất tài liệu, 
 
 ## 🧠 AI Analysis Và Second Brain
 - Mỗi artifact capture/download có thể đi kèm AI sidecar dạng `*_AI_ANALYSIS.md`.
+- CLI local-first để tạo sidecar: `analyze_artifact.py`.
 - Template phân tích nằm ở `templates/ai_analysis_sidecar_template.md`.
 - Kịch bản test Gemini nằm ở `Gemini_Test/GEMINI_TEST_SCRIPT_20260527.md`.
 - Raw captures và chat analysis chứa dữ liệu riêng tư mặc định không commit lên GitHub.

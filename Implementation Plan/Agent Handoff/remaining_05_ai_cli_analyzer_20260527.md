@@ -156,3 +156,17 @@ PASS khi:
 - Test/dummy artifact không riêng tư dưới `outputs/test_ai/` nếu đã ignore
 
 Không dùng V12 chat private làm test public.
+
+---
+
+## 9. Lượt thực hiện Codex 2026-05-27
+
+Kết quả: IMPLEMENTED.
+
+- Đã tạo `analyze_artifact.py`.
+- Mode hiện có: `manual`, `local-ocr`, `gemini`.
+- `manual` tạo Markdown/JSON sidecar local-only.
+- `local-ocr` tạo scaffold và ghi limitation vì repo chưa cấu hình OCR engine.
+- `gemini` bị chặn nếu thiếu `--allow-cloud-upload`; kể cả có flag, repo vẫn chưa gọi Gemini API tự động và sẽ hướng dẫn dùng Gemini test script.
+- Output `*_AI_ANALYSIS.md` và `*_AI_ANALYSIS.json` vẫn được `.gitignore` bảo vệ.
+- Xem validation note: `Implementation Plan/uat_ai_cli_analyzer_20260527.md`.
