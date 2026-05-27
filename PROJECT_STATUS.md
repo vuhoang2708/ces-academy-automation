@@ -9,10 +9,10 @@
 
 | Module | Trạng thái hiện tại | Ghi chú |
 |---|---|---|
-| V10 CES Web Capture | Functional, cần UAT lại | Đã bỏ hardcoded Google Drive path; output mặc định nằm trong `outputs/`. |
+| V10 CES Web Capture | Partial UAT, blocked by login | Đã bỏ hardcoded Google Drive path; test 2026-05-27 ghi summary `blocked_login`, cần Chrome/CES session đã đăng nhập để PASS. |
 | V11 SharePoint | Skeleton/basic screenshot | Chưa có CV auto-stop/CSS injection trong code hiện tại. |
 | V12 Zalo Screenshot | Validated test run | Đã có restore minimized window, focus click và duplicate detection. |
-| V13 Facebook | Hardened script, cần live UAT | Đã thêm timeout, MIME check, streaming download và run summary. |
+| V13 Facebook | Partial UAT, blocked by missing CDP | Đã thêm timeout, MIME check, streaming download và run summary; test 2026-05-27 thiếu Chrome debug `9222`, cần live Facebook session để PASS. |
 | V13 Zalo | Quarantined/unavailable | File cũ corrupt/null bytes; hiện là stub báo unavailable. |
 | V14 Zalo Desktop | Diagnostic only | Chưa phải downloader end-to-end. |
 | Hub Server / Portal | Planned | `hub_server.py` chưa có trong repo hiện tại. |

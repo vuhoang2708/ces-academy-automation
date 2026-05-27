@@ -112,6 +112,13 @@ def get_facebook_target() -> dict | None:
     return next((tab for tab in tabs if "facebook.com" in tab.get("url", "")), None)
 
 
+def write_summary(summary: dict) -> Path:
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    summary_path = OUTPUT_DIR / "latest_run_summary.json"
+    summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
+    return summary_path
+
+
 async def run_v13_facebook() -> None:
     print("🚀 V13 Facebook Media Downloader - Dynamic Discovery + Hardened Download")
     cdp = CDPClient()
@@ -129,6 +136,9 @@ async def run_v13_facebook() -> None:
     target = get_facebook_target()
     if not target:
         print("⚠️ Không có tab Facebook đang mở trong Chrome debug.")
+        summary["errors"].append({"reason": f"no_facebook_tab_or_cdp_unavailable:{FB_DEBUG_URL}"})
+        summary_path = write_summary(summary)
+        print(f"📊 Summary: {summary_path}")
         return
 
     try:
@@ -211,9 +221,7 @@ async def run_v13_facebook() -> None:
         summary["errors"].append({"reason": str(exc)})
         print(f"❌ Lỗi V13 Facebook: {exc}")
     finally:
-        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-        summary_path = OUTPUT_DIR / "latest_run_summary.json"
-        summary_path.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
+        summary_path = write_summary(summary)
         print(f"📊 Summary: {summary_path}")
         print(
             "✅ Hoàn tất: "

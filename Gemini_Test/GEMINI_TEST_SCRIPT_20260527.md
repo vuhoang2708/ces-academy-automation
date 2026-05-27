@@ -117,3 +117,18 @@ Sau mỗi test, lưu:
 - pass/fail theo rubric;
 - lỗi cần sửa trong prompt/template;
 - link Google Drive/NotebookLM/database nếu đã sync.
+
+---
+
+## 9. Test Bổ Sung Sau UAT V10/V13
+
+Hai plan đầu đã được chạy ở mức PARTIAL ngày 2026-05-27:
+
+- V13 Facebook bị chặn vì thiếu Chrome debug `9222`.
+- V10 CES bị chặn vì redirect về login.
+
+Dùng kịch bản riêng để Gemini review phần UAT kỹ thuật trước khi phân tích nội dung:
+
+```text
+Gemini_Test/GEMINI_TEST_SCRIPT_20260527_V10_V13_PARTIAL_UAT.md
+```
