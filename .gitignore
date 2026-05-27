@@ -9,6 +9,12 @@ venv/
 *.png
 *.jpg
 *.pdf
+downloads/
+outputs/
+zalo_captures/
+*_AI_ANALYSIS.md
+*_AI_ANALYSIS.json
+outputs_manifest.jsonl
 zalo_pro_captures/
 v12_captures/
 v13_fb_downloads/

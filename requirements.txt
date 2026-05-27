@@ -1,0 +1,9 @@
+websockets==12.0
+requests==2.31.0
+pyautogui==0.9.54
+opencv-python==4.9.0.80
+img2pdf==0.5.1
+pygetwindow==0.0.9
+Pillow==10.3.0
+playwright==1.44.0
+numpy==1.26.4

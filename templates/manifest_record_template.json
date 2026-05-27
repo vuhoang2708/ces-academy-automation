@@ -1,0 +1,18 @@
+{
+  "artifact_id": "v12_zalo_20260527_103203",
+  "version": "V12",
+  "source_type": "zalo_chat_capture",
+  "created_at": "2026-05-27T10:32:03+07:00",
+  "local_sources": [],
+  "analysis_md": "",
+  "analysis_json": "",
+  "notebooklm_source": "",
+  "notebooklm_prompt": "",
+  "google_drive_links": [],
+  "database_id": "",
+  "tags": [],
+  "people": [],
+  "projects": [],
+  "privacy_level": "private",
+  "sync_status": "local_only"
+}
