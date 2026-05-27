@@ -1,6 +1,6 @@
 # PROJECT STATUS: CES Academy Automation
 
-**Ngày cập nhật:** 2026-05-27 (handoff 03+04 completed)
+**Ngày cập nhật:** 2026-05-27 (handoff 03+04+06+07+08 completed)
 **Mục đích:** Nguồn trạng thái hiện tại để tránh spec-code drift.
 
 ---
@@ -14,9 +14,9 @@
 | V12 Zalo Screenshot | Validated test run | Đã có restore minimized window, focus click và duplicate detection. |
 | V13 Facebook | Partial UAT, blocked by missing CDP | Đã thêm timeout, MIME check, streaming download và run summary; test 2026-05-27 thiếu Chrome debug `9222`, cần live Facebook session để PASS. |
 | V13 Zalo | Quarantined/unavailable — RETIRED | File cũ corrupt/null bytes; không có source hợp lệ trong Git history. Stub compile-safe. Zalo media → V14. Xem `Implementation Plan/decision_v13_zalo_retired_20260527.md`. |
-| V14 Zalo Desktop | Diagnostic only | Chưa phải downloader end-to-end. |
-| Hub Server / Portal | Planned | `hub_server.py` chưa có trong repo hiện tại. |
-| AI sidecar | Local CLI scaffold implemented | Có `analyze_artifact.py` tạo Markdown/JSON local-only; Gemini API vẫn chưa gọi tự động. |
+| V14 Zalo Desktop | DRY_RUN_READY | 3-mode CLI (diagnostic/dry-run/execute). Diagnostic PASS + Dry-run PASS 2026-05-27. Execute cần calibration. Xem `Implementation Plan/decision_plan07_v14_zalo_dryrun_20260527.md`. |
+| Hub Server / Portal | Minimal implemented | `hub_server.py` có /health /modules /artifacts. Bind 127.0.0.1 only. POST /run blocked. Xem `Implementation Plan/decision_plan08_hub_server_minimal_20260527.md`. |
+| AI sidecar | Local CLI scaffold implemented | Có `analyze_artifact.py` tạo Markdown/JSON local-only; `record_artifact.py` ghi manifest JSONL. Gemini API chưa gọi tự động. |
 
 ---
 
