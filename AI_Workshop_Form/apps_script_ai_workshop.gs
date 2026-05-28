@@ -26,8 +26,6 @@ const RESPONSE_HEADERS = [
   'email',
   'phoneZalo',
   'roleTeam',
-  'organization',
-  'location',
   'sessionPreference',
   'joinMode',
   'aiTools',
@@ -102,8 +100,6 @@ function handleWorkshopIntake_(payload) {
     clean_(payload.email),
     clean_(payload.phoneZalo),
     clean_(payload.roleTeam),
-    clean_(payload.organization),
-    clean_(payload.location),
     clean_(payload.sessionPreference),
     clean_(payload.joinMode),
     normalizeList_(payload.aiTools),
@@ -143,8 +139,7 @@ function sendInstructorEmail_(payload, submissionId, timestamp) {
     `Email: ${clean_(payload.email)}`,
     `SĐT/Zalo: ${clean_(payload.phoneZalo)}`,
     `Vai trò/team: ${clean_(payload.roleTeam)}`,
-    `Đơn vị: ${clean_(payload.organization)}`,
-    `Khu vực/hình thức: ${clean_(payload.location)} / ${clean_(payload.joinMode)}`,
+    `Hình thức tham gia: ${clean_(payload.joinMode)}`,
     `Lịch mong muốn: ${clean_(payload.sessionPreference)}`,
     '',
     'Cách đang dùng AI:',
@@ -201,11 +196,26 @@ function getSheet_(tabName, headers) {
     sheet = spreadsheet.insertSheet(tabName);
   }
 
+  ensureHeaders_(sheet, headers);
+  return sheet;
+}
+
+function ensureHeaders_(sheet, headers) {
   if (sheet.getLastRow() === 0) {
     sheet.appendRow(headers);
+    return;
   }
 
-  return sheet;
+  const width = Math.max(sheet.getLastColumn(), headers.length);
+  const existing = sheet.getRange(1, 1, 1, width).getValues()[0].map(clean_);
+  const expected = headers.map(clean_);
+  const headMismatch = existing.slice(0, expected.length).join('\u0001') !== expected.join('\u0001');
+  const extraHeaders = existing.slice(expected.length).some(Boolean);
+
+  if (headMismatch || extraHeaders) {
+    sheet.getRange(1, 1, 1, width).clearContent();
+    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+  }
 }
 
 function parsePayload_(e) {

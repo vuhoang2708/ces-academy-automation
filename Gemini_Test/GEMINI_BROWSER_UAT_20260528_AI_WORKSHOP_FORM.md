@@ -85,8 +85,6 @@ Họ tên: Codex Gemini UAT AI Workshop
 Email: dùng email test thật mà agent/user có thể kiểm tra inbox
 SĐT/Zalo: 0900000000
 Vai trò/team: UAT / AI adoption test
-Đơn vị/công ty: CES test
-Khu vực: Online
 Lịch mong muốn: Thứ Hai 01/06
 Hình thức tham gia: Online
 Công cụ đang dùng: Gemini / Gemini Pro, ChatGPT, Claude
@@ -122,8 +120,6 @@ fullName
 email
 phoneZalo
 roleTeam
-organization
-location
 sessionPreference
 joinMode
 aiTools

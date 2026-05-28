@@ -84,7 +84,11 @@ Kết quả Apps Script trả về:
 
 ## 4. Trạng Thái Còn Cần Browser UAT
 
-Chưa chạy browser UAT đầy đủ trên form HTML sau khi thay endpoint mới. Cần dùng:
+Sau feedback ngày 2026-05-28, form đã bỏ hai trường thông tin phụ không cần thiết và đổi tiêu đề section nội bộ thành ngôn ngữ người dùng bình thường.
+
+Repo backend cũng đã bỏ hai field đó khỏi schema. Cần redeploy Apps Script từ `AI_Workshop_Form/apps_script_ai_workshop.gs` để Google Sheet/email dùng schema mới. Code mới có `ensureHeaders_()` để normalize header row của tab `AIWorkshopResponses`, tránh append dữ liệu mới bị lệch cột nếu tab đang còn header cũ.
+
+Chưa chạy browser UAT đầy đủ trên form HTML sau khi thay endpoint mới và sau cleanup field. Cần dùng:
 
 ```text
 Gemini_Test/GEMINI_BROWSER_UAT_20260528_AI_WORKSHOP_FORM.md

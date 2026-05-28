@@ -316,20 +316,6 @@
               <input id="roleTeam" name="roleTeam" placeholder="Ví dụ: Marketing, HR, Kế toán, nhân sự mới..." required>
             </div>
             <div class="field">
-              <label for="organization">Đơn vị / công ty</label>
-              <input id="organization" name="organization">
-            </div>
-            <div class="field">
-              <label for="location">Khu vực</label>
-              <select id="location" name="location">
-                <option value="">Chọn nếu phù hợp</option>
-                <option>Khu Đông</option>
-                <option>Khu Tây</option>
-                <option>Online</option>
-                <option>Khác</option>
-              </select>
-            </div>
-            <div class="field">
               <label for="sessionPreference">Lịch mong muốn *</label>
               <select id="sessionPreference" name="sessionPreference" required>
                 <option value="">Chọn lịch</option>
@@ -389,7 +375,7 @@
         </section>
 
         <section class="section">
-          <h2>Câu hỏi giống luồng trao đổi với Hằng</h2>
+          <h2>Nhu cầu và kỳ vọng</h2>
           <div class="grid">
             <div class="field full">
               <label for="satisfaction">Điều gì về AI đang làm bạn hài lòng?</label>
@@ -489,8 +475,6 @@
         email: document.getElementById('email').value.trim(),
         phoneZalo: document.getElementById('phoneZalo').value.trim(),
         roleTeam: document.getElementById('roleTeam').value.trim(),
-        organization: document.getElementById('organization').value.trim(),
-        location: document.getElementById('location').value,
         sessionPreference: document.getElementById('sessionPreference').value,
         joinMode: document.getElementById('joinMode').value,
         aiTools: getCheckedValues('aiTools'),
@@ -520,8 +504,6 @@
         `Email: ${payload.email}`,
         `SĐT/Zalo: ${payload.phoneZalo}`,
         `Vai trò/team: ${payload.roleTeam}`,
-        `Đơn vị: ${payload.organization}`,
-        `Khu vực: ${payload.location}`,
         `Lịch mong muốn: ${payload.sessionPreference}`,
         `Hình thức: ${payload.joinMode}`,
         `Công cụ AI: ${(payload.aiTools || []).join(', ')} ${payload.aiToolsOther}`,
