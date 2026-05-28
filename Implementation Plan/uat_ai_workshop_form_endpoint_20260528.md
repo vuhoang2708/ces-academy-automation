@@ -1,15 +1,15 @@
 # UAT Result: AI Workshop Form Endpoint
 
 **Ngày chạy:** 2026-05-28  
-**Kết quả:** PARTIAL - form đã được cấu hình endpoint, nhưng Web App URL hiện trả `403 Forbidden`  
+**Kết quả:** PASS cho backend endpoint qua GET và POST trực tiếp
 **Module:** `AI_Workshop_Form/`
 
 ---
 
-## 1. Endpoint Được Cấu Hình
+## 1. Endpoint Đang Dùng
 
 ```text
-https://script.google.com/macros/s/AKfycbyzbTxCSENSDhi77tDueLHv6Kc0TnUmf7Exxa41hT5IH0xAbO0zBHM_sSCJDlIukRWS/exec
+https://script.google.com/macros/s/AKfycbwen9Ev8uCqfniWswTBn0krubpfVlPsA0ILvcSI_7j4Rj5JitCzaDJWVeI66r7dwFV1/exec
 ```
 
 File đã gắn URL:
@@ -18,6 +18,14 @@ File đã gắn URL:
 AI_Workshop_Form/index.html
 ```
 
+Endpoint cũ bị loại khỏi form:
+
+```text
+https://script.google.com/macros/s/AKfycbyzbTxCSENSDhi77tDueLHv6Kc0TnUmf7Exxa41hT5IH0xAbO0zBHM_sSCJDlIukRWS/exec
+```
+
+Endpoint cũ từng trả `403 Forbidden`.
+
 ---
 
 ## 2. Kết Quả Kiểm Tra GET
@@ -25,52 +33,10 @@ AI_Workshop_Form/index.html
 Lệnh kiểm tra:
 
 ```powershell
-Invoke-RestMethod -Uri "https://script.google.com/macros/s/AKfycbyzbTxCSENSDhi77tDueLHv6Kc0TnUmf7Exxa41hT5IH0xAbO0zBHM_sSCJDlIukRWS/exec" -Method Get
+Invoke-RestMethod -Uri "https://script.google.com/macros/s/AKfycbwen9Ev8uCqfniWswTBn0krubpfVlPsA0ILvcSI_7j4Rj5JitCzaDJWVeI66r7dwFV1/exec" -Method Get
 ```
 
 Kết quả:
-
-```text
-403 Forbidden
-```
-
-Nội dung HTML của Google hiển thị:
-
-```text
-Bạn cần có quyền truy cập
-Trực tiếp mở tài liệu để xem có thể yêu cầu cấp quyền truy cập hay không hoặc chuyển sang tài khoản có quyền truy cập.
-```
-
----
-
-## 3. Đánh Giá
-
-Form frontend không còn bị thiếu cấu hình endpoint, nhưng chưa thể gọi live backend thành công.
-
-Nguyên nhân có khả năng cao:
-
-1. Web App deploy chưa đặt `Who has access` là `Anyone with the link`.
-2. Apps Script chưa authorize xong quyền đọc/ghi Google Sheet và gửi email.
-3. URL đang trỏ tới Apps Script project/deployment mà tài khoản hiện tại hoặc public user chưa có quyền chạy.
-4. Sau khi đổi quyền, chưa `Deploy` lại bản mới.
-
----
-
-## 4. Cách Sửa Trên Google Apps Script
-
-Trong Apps Script:
-
-1. Bấm `Deploy` > `Manage deployments`.
-2. Chọn deployment hiện tại hoặc tạo `New deployment`.
-3. Type: `Web app`.
-4. Cấu hình:
-   - `Execute as`: `Me`
-   - `Who has access`: `Anyone with the link`
-5. Authorize đủ quyền:
-   - Google Sheets
-   - MailApp/Gmail send
-6. Copy lại URL `/exec`.
-7. Mở URL trong tab ẩn danh hoặc browser không đăng nhập. PASS khi trả JSON:
 
 ```json
 {
@@ -81,14 +47,67 @@ Trong Apps Script:
 }
 ```
 
+Đánh giá: PASS. Web App hiện chạy được public endpoint theo cấu hình cần thiết.
+
 ---
 
-## 5. Điều Kiện Để Kết Luận PASS
+## 3. Kết Quả Kiểm Tra POST Trực Tiếp
 
-Chỉ kết luận PASS khi:
+Test data đã gửi bằng `application/x-www-form-urlencoded` với field `payload` chứa JSON.
 
-- `GET /exec` trả JSON `ok: true`;
-- form submit test data thành công;
-- Sheet có dòng mới trong tab `AIWorkshopResponses`;
-- email người điền form được gửi;
+Submission ID:
+
+```text
+aiw_codex_live_test_20260528_135246
+```
+
+Email test:
+
+```text
+vuhoang2708+aiworkshoptest@gmail.com
+```
+
+Kết quả Apps Script trả về:
+
+```json
+{
+  "ok": true,
+  "kind": "ai_workshop_intake",
+  "submissionId": "aiw_codex_live_test_20260528_135246",
+  "message": "Thông tin đã được ghi vào Google Sheet và email xác nhận đã được gửi."
+}
+```
+
+Đánh giá: PASS cho đường backend trực tiếp. Apps Script xác nhận đã ghi Google Sheet và gửi email.
+
+---
+
+## 4. Trạng Thái Còn Cần Browser UAT
+
+Chưa chạy browser UAT đầy đủ trên form HTML sau khi thay endpoint mới. Cần dùng:
+
+```text
+Gemini_Test/GEMINI_BROWSER_UAT_20260528_AI_WORKSHOP_FORM.md
+```
+
+Browser UAT cần xác nhận thêm:
+
+- form validation chặn thiếu trường bắt buộc;
+- browser submit thành công từ `AI_Workshop_Form/index.html`;
+- tab `AIWorkshopResponses` có dòng mới;
+- inbox nhận email xác nhận;
 - `vuhoang2708@gmail.com` nhận email notification.
+
+---
+
+## 5. Kết Luận
+
+Backend Apps Script đã qua smoke test thật bằng GET và POST.
+
+Trạng thái tổng thể:
+
+```text
+Backend endpoint: PASS
+Frontend wired to endpoint: PASS
+Full browser UAT: PENDING
+```
