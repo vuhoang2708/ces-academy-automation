@@ -39,7 +39,7 @@ Yêu cầu chính:
 Endpoint:
 
 ```javascript
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwen9Ev8uCqfniWswTBn0krubpfVlPsA0ILvcSI_7j4Rj5JitCzaDJWVeI66r7dwFV1/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxcnPEZ3DnS33IDNY_Pa0HxVikWVCYOKIc4ipT6EkZ1hfkC11j-osX8qJ4Aq5vdBpZO/exec';
 ```
 
 Method:

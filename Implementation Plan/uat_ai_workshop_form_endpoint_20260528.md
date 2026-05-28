@@ -9,7 +9,7 @@
 ## 1. Endpoint Đang Dùng
 
 ```text
-https://script.google.com/macros/s/AKfycbwen9Ev8uCqfniWswTBn0krubpfVlPsA0ILvcSI_7j4Rj5JitCzaDJWVeI66r7dwFV1/exec
+https://script.google.com/macros/s/AKfycbxcnPEZ3DnS33IDNY_Pa0HxVikWVCYOKIc4ipT6EkZ1hfkC11j-osX8qJ4Aq5vdBpZO/exec
 ```
 
 File đã gắn URL:
@@ -21,10 +21,10 @@ AI_Workshop_Form/index.html
 Endpoint cũ bị loại khỏi form:
 
 ```text
-https://script.google.com/macros/s/AKfycbyzbTxCSENSDhi77tDueLHv6Kc0TnUmf7Exxa41hT5IH0xAbO0zBHM_sSCJDlIukRWS/exec
+https://script.google.com/macros/s/AKfycbwen9Ev8uCqfniWswTBn0krubpfVlPsA0ILvcSI_7j4Rj5JitCzaDJWVeI66r7dwFV1/exec
 ```
 
-Endpoint cũ từng trả `403 Forbidden`.
+Endpoint trung gian trước đó vẫn chạy được, nhưng đã được thay bằng endpoint redeploy mới sau cleanup schema.
 
 ---
 
@@ -33,7 +33,7 @@ Endpoint cũ từng trả `403 Forbidden`.
 Lệnh kiểm tra:
 
 ```powershell
-Invoke-RestMethod -Uri "https://script.google.com/macros/s/AKfycbwen9Ev8uCqfniWswTBn0krubpfVlPsA0ILvcSI_7j4Rj5JitCzaDJWVeI66r7dwFV1/exec" -Method Get
+Invoke-RestMethod -Uri "https://script.google.com/macros/s/AKfycbxcnPEZ3DnS33IDNY_Pa0HxVikWVCYOKIc4ipT6EkZ1hfkC11j-osX8qJ4Aq5vdBpZO/exec" -Method Get
 ```
 
 Kết quả:
@@ -58,7 +58,7 @@ Test data đã gửi bằng `application/x-www-form-urlencoded` với field `pay
 Submission ID:
 
 ```text
-aiw_codex_live_test_20260528_135246
+aiw_codex_schema_clean_test_20260528_140621
 ```
 
 Email test:
@@ -73,7 +73,7 @@ Kết quả Apps Script trả về:
 {
   "ok": true,
   "kind": "ai_workshop_intake",
-  "submissionId": "aiw_codex_live_test_20260528_135246",
+  "submissionId": "aiw_codex_schema_clean_test_20260528_140621",
   "message": "Thông tin đã được ghi vào Google Sheet và email xác nhận đã được gửi."
 }
 ```
@@ -86,7 +86,7 @@ Kết quả Apps Script trả về:
 
 Sau feedback ngày 2026-05-28, form đã bỏ hai trường thông tin phụ không cần thiết và đổi tiêu đề section nội bộ thành ngôn ngữ người dùng bình thường.
 
-Repo backend cũng đã bỏ hai field đó khỏi schema. Cần redeploy Apps Script từ `AI_Workshop_Form/apps_script_ai_workshop.gs` để Google Sheet/email dùng schema mới. Code mới có `ensureHeaders_()` để normalize header row của tab `AIWorkshopResponses`, tránh append dữ liệu mới bị lệch cột nếu tab đang còn header cũ.
+Repo backend cũng đã bỏ hai field đó khỏi schema và endpoint mới đã được test bằng payload schema-clean. Code mới có `ensureHeaders_()` để normalize header row của tab `AIWorkshopResponses`, tránh append dữ liệu mới bị lệch cột nếu tab đang còn header cũ.
 
 Chưa chạy browser UAT đầy đủ trên form HTML sau khi thay endpoint mới và sau cleanup field. Cần dùng:
 

@@ -57,7 +57,7 @@ Kỳ vọng mới:
 Đã kiểm tra:
 
 - Endpoint mới trả `GET ok: true`.
-- POST trực tiếp trả `ok: true` với submission ID `aiw_codex_live_test_20260528_135246`.
+- POST trực tiếp sau cleanup schema trả `ok: true` với submission ID `aiw_codex_schema_clean_test_20260528_140621`.
 - Sau cleanup field, local syntax check đã PASS cho Apps Script và JS trong HTML.
 
 Chưa kiểm tra xong:
@@ -103,7 +103,7 @@ POST /exec:
 {
   "ok": true,
   "kind": "ai_workshop_intake",
-  "submissionId": "aiw_codex_live_test_20260528_135246",
+  "submissionId": "aiw_codex_schema_clean_test_20260528_140621",
   "message": "Thông tin đã được ghi vào Google Sheet và email xác nhận đã được gửi."
 }
 ```
