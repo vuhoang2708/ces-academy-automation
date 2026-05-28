@@ -132,3 +132,19 @@ Dùng kịch bản riêng để Gemini review phần UAT kỹ thuật trước k
 ```text
 Gemini_Test/GEMINI_TEST_SCRIPT_20260527_V10_V13_PARTIAL_UAT.md
 ```
+
+---
+
+## 10. Browser UAT Cho Các Blocker Còn Mở
+
+Nếu Gemini/agent có browser và user có thể đăng nhập CES/Facebook trong browser đó, dùng kịch bản:
+
+```text
+Gemini_Test/GEMINI_BROWSER_UAT_SCRIPT_20260528_OPEN_BLOCKERS.md
+```
+
+Kịch bản này tập trung vào:
+
+- V10 CES live capture với session đã đăng nhập.
+- V13 Facebook live downloader với tab Facebook trên CDP port `9222`.
+- V14 browser-assisted calibration và Hub browser smoke test.
