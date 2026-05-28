@@ -143,6 +143,12 @@ Nếu Gemini/agent có browser và user có thể đăng nhập CES/Facebook tro
 Gemini_Test/GEMINI_BROWSER_UAT_SCRIPT_20260528_OPEN_BLOCKERS.md
 ```
 
+Để test form thu thập nhu cầu AI Workshop sau khi deploy Apps Script Web App, dùng:
+
+```text
+Gemini_Test/GEMINI_BROWSER_UAT_20260528_AI_WORKSHOP_FORM.md
+```
+
 Kịch bản này tập trung vào:
 
 - V10 CES live capture với session đã đăng nhập.

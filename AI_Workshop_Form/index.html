@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Agent Workshop - Form Thu Thập Nhu Cầu</title>
+  <style>
+    :root {
+      --ink: #172026;
+      --muted: #5b6770;
+      --line: #d9e1e7;
+      --paper: #ffffff;
+      --soft: #f5f8fb;
+      --blue: #1f6feb;
+      --green: #188038;
+      --red: #b3261e;
+      --amber: #a15c00;
+      --focus: rgba(31, 111, 235, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #eef3f7;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 28px 18px 48px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 38px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .intro {
+      max-width: 760px;
+      margin: 8px 0 0;
+      color: var(--muted);
+    }
+
+    .status-pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 12px;
+      background: var(--paper);
+      color: var(--muted);
+      white-space: nowrap;
+      font-size: 14px;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .section,
+    .summary-panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .section {
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+
+    .section h2,
+    .summary-panel h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label,
+    legend {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid #bfccd6;
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      padding: 10px 11px;
+    }
+
+    textarea {
+      min-height: 104px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 3px solid var(--focus);
+      border-color: var(--blue);
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .choices {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .choice {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 9px 10px;
+      background: var(--soft);
+      font-weight: 400;
+    }
+
+    .choice input {
+      width: auto;
+      margin: 0;
+    }
+
+    .side {
+      position: sticky;
+      top: 18px;
+    }
+
+    .summary-panel {
+      padding: 16px;
+    }
+
+    .summary-panel p {
+      color: var(--muted);
+      margin: 0 0 14px;
+      font-size: 14px;
+    }
+
+    .summary-list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 6px;
+      padding: 12px 14px;
+      background: var(--blue);
+      color: #fff;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      background: #e7eef7;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    button:disabled {
+      opacity: 0.64;
+      cursor: wait;
+    }
+
+    .result {
+      min-height: 48px;
+      border-radius: 6px;
+      padding: 11px;
+      font-size: 14px;
+      border: 1px solid var(--line);
+      background: var(--soft);
+      color: var(--muted);
+    }
+
+    .result.ok {
+      border-color: rgba(24, 128, 56, 0.35);
+      color: var(--green);
+      background: #eef8f0;
+    }
+
+    .result.err {
+      border-color: rgba(179, 38, 30, 0.35);
+      color: var(--red);
+      background: #fff1f0;
+    }
+
+    .result.warn {
+      border-color: rgba(161, 92, 0, 0.35);
+      color: var(--amber);
+      background: #fff7e6;
+    }
+
+    .hidden-hp {
+      position: absolute;
+      left: -10000px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 860px) {
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      form {
+        grid-template-columns: 1fr;
+      }
+
+      .side {
+        position: static;
+      }
+    }
+
+    @media (max-width: 620px) {
+      main {
+        padding: 20px 12px 36px;
+      }
+
+      .grid,
+      .choices {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="topbar">
+      <div>
+        <h1>AI Agent Workshop</h1>
+        <p class="intro">Form thu thập thông tin và bài toán thật trước buổi chia sẻ về AI agent, Antigravity, Claude, Gemini, ChatGPT và các workflow áp dụng vào công việc.</p>
+      </div>
+      <div class="status-pill">Lưu Sheet + gửi email</div>
+    </div>
+
+    <form id="intakeForm" novalidate>
+      <div>
+        <section class="section">
+          <h2>Thông tin cơ bản</h2>
+          <div class="grid">
+            <div class="field">
+              <label for="fullName">Họ và tên *</label>
+              <input id="fullName" name="fullName" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="email">Email nhận xác nhận *</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="phoneZalo">SĐT/Zalo</label>
+              <input id="phoneZalo" name="phoneZalo" autocomplete="tel">
+            </div>
+            <div class="field">
+              <label for="roleTeam">Vai trò / team *</label>
+              <input id="roleTeam" name="roleTeam" placeholder="Ví dụ: Marketing, HR, Kế toán, nhân sự mới..." required>
+            </div>
+            <div class="field">
+              <label for="organization">Đơn vị / công ty</label>
+              <input id="organization" name="organization">
+            </div>
+            <div class="field">
+              <label for="location">Khu vực</label>
+              <select id="location" name="location">
+                <option value="">Chọn nếu phù hợp</option>
+                <option>Khu Đông</option>
+                <option>Khu Tây</option>
+                <option>Online</option>
+                <option>Khác</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="sessionPreference">Lịch mong muốn *</label>
+              <select id="sessionPreference" name="sessionPreference" required>
+                <option value="">Chọn lịch</option>
+                <option>Thứ Sáu 29/05</option>
+                <option>Thứ Hai 01/06</option>
+                <option>Thứ Tư 03/06</option>
+                <option>Buổi online / xem recording</option>
+                <option>Chưa chắc, cần báo lại</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="joinMode">Hình thức tham gia</label>
+              <select id="joinMode" name="joinMode">
+                <option>Offline</option>
+                <option>Online</option>
+                <option>Hybrid / tùy lịch</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Cách đang dùng AI</h2>
+          <fieldset>
+            <legend>Công cụ đang dùng</legend>
+            <div class="choices">
+              <label class="choice"><input type="checkbox" name="aiTools" value="Gemini / Gemini Pro"> Gemini / Gemini Pro</label>
+              <label class="choice"><input type="checkbox" name="aiTools" value="ChatGPT"> ChatGPT</label>
+              <label class="choice"><input type="checkbox" name="aiTools" value="Claude"> Claude</label>
+              <label class="choice"><input type="checkbox" name="aiTools" value="DeepSeek"> DeepSeek</label>
+              <label class="choice"><input type="checkbox" name="aiTools" value="Copilot"> Copilot</label>
+              <label class="choice"><input type="checkbox" name="aiTools" value="Chưa dùng thường xuyên"> Chưa dùng thường xuyên</label>
+            </div>
+          </fieldset>
+          <div class="field" style="margin-top: 12px;">
+            <label for="aiToolsOther">Công cụ khác</label>
+            <input id="aiToolsOther" name="aiToolsOther" placeholder="Ví dụ: Canva AI, Notion AI, Perplexity...">
+          </div>
+
+          <fieldset style="margin-top: 16px;">
+            <legend>Việc bạn đang dùng AI để làm</legend>
+            <div class="choices">
+              <label class="choice"><input type="checkbox" name="aiUseCases" value="Viết kịch bản TikTok/video"> Kịch bản TikTok/video</label>
+              <label class="choice"><input type="checkbox" name="aiUseCases" value="Làm poster/nội dung thiết kế"> Poster/nội dung thiết kế</label>
+              <label class="choice"><input type="checkbox" name="aiUseCases" value="Email/tài liệu/báo cáo"> Email/tài liệu/báo cáo</label>
+              <label class="choice"><input type="checkbox" name="aiUseCases" value="HR/onboarding/đào tạo"> HR/onboarding/đào tạo</label>
+              <label class="choice"><input type="checkbox" name="aiUseCases" value="Marketing/sales"> Marketing/sales</label>
+              <label class="choice"><input type="checkbox" name="aiUseCases" value="Kế toán/tài chính"> Kế toán/tài chính</label>
+              <label class="choice"><input type="checkbox" name="aiUseCases" value="Tra cứu/nghiên cứu"> Tra cứu/nghiên cứu</label>
+              <label class="choice"><input type="checkbox" name="aiUseCases" value="Tự động hóa công việc"> Tự động hóa công việc</label>
+            </div>
+          </fieldset>
+          <div class="field" style="margin-top: 12px;">
+            <label for="aiUseCasesOther">Use case khác</label>
+            <input id="aiUseCasesOther" name="aiUseCasesOther">
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Câu hỏi giống luồng trao đổi với Hằng</h2>
+          <div class="grid">
+            <div class="field full">
+              <label for="satisfaction">Điều gì về AI đang làm bạn hài lòng?</label>
+              <textarea id="satisfaction" name="satisfaction" placeholder="Ví dụ: lên ý tưởng nhanh hơn, có dàn ý, tiết kiệm thời gian..."></textarea>
+            </div>
+            <div class="field full">
+              <label for="frustrations">Những lần nào AI làm bạn mất thời gian hoặc khó chịu?</label>
+              <textarea id="frustrations" name="frustrations" placeholder="Ví dụ: phải mô tả quá chi tiết, trả lời sai, văn phong chưa đúng ý, khó kiểm chứng..."></textarea>
+            </div>
+            <div class="field full">
+              <label for="expectation">Bạn kỳ vọng gì ở buổi chia sẻ? *</label>
+              <textarea id="expectation" name="expectation" required placeholder="Ví dụ: biết cách prompt tối ưu hơn, hiểu Claude/Antigravity, có workflow áp dụng ngay..."></textarea>
+            </div>
+            <div class="field full">
+              <label for="concreteTask">Một bài toán thật bạn muốn mang tới workshop *</label>
+              <textarea id="concreteTask" name="concreteTask" required placeholder="Ví dụ: viết lại kịch bản video, tạo prompt poster, phân tích file chat, làm báo cáo tự động..."></textarea>
+            </div>
+            <div class="field">
+              <label for="budgetRange">Budget AI phù hợp mỗi tháng</label>
+              <select id="budgetRange" name="budgetRange">
+                <option value="">Chưa rõ</option>
+                <option>0đ / ưu tiên bản free</option>
+                <option>Dưới 200.000đ</option>
+                <option>200.000đ - 500.000đ</option>
+                <option>500.000đ - 1.000.000đ</option>
+                <option>Trên 1.000.000đ nếu có hiệu quả rõ</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="preferredOutput">Bạn muốn nhận output dạng nào?</label>
+              <select id="preferredOutput" name="preferredOutput">
+                <option>Prompt mẫu</option>
+                <option>Workflow từng bước</option>
+                <option>Demo live trên bài toán thật</option>
+                <option>Checklist kiểm chứng AI</option>
+                <option>Recording + tài liệu sau buổi</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Xác nhận</h2>
+          <div class="hidden-hp" aria-hidden="true">
+            <label for="website">Website</label>
+            <input id="website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+          <label class="choice">
+            <input id="consentEmail" name="consentEmail" type="checkbox" value="yes" required>
+            Tôi đồng ý dùng email này để nhận xác nhận, tài liệu và cập nhật liên quan đến workshop.
+          </label>
+          <p class="hint">Dữ liệu sẽ được ghi vào Google Sheet do người hướng dẫn quản lý và gửi email xác nhận cho bạn cùng người hướng dẫn.</p>
+        </section>
+      </div>
+
+      <aside class="side">
+        <div class="summary-panel">
+          <h2>Trước khi gửi</h2>
+          <p>Form này ưu tiên thu bài toán thật để buổi workshop không chỉ là demo công cụ.</p>
+          <ul class="summary-list">
+            <li>Nêu rõ công cụ đang dùng.</li>
+            <li>Nói cả điểm hài lòng lẫn điểm gây khó chịu.</li>
+            <li>Mang một việc thật để demo live.</li>
+          </ul>
+          <div class="actions">
+            <button id="submitButton" type="submit">Gửi thông tin</button>
+            <button class="secondary" type="button" id="copyButton">Copy bản nháp</button>
+            <div id="result" class="result" aria-live="polite">Chưa gửi. Sau khi gửi thành công, bạn sẽ nhận email xác nhận.</div>
+          </div>
+        </div>
+      </aside>
+    </form>
+  </main>
+
+  <script>
+    const APPS_SCRIPT_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
+
+    const form = document.getElementById('intakeForm');
+    const submitButton = document.getElementById('submitButton');
+    const copyButton = document.getElementById('copyButton');
+    const resultBox = document.getElementById('result');
+
+    function makeSubmissionId() {
+      return `aiw_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+    }
+
+    function getCheckedValues(name) {
+      return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map((item) => item.value);
+    }
+
+    function buildPayload() {
+      return {
+        kind: 'ai_workshop_intake',
+        submissionId: makeSubmissionId(),
+        source: 'AI_Workshop_Form/index.html',
+        fullName: document.getElementById('fullName').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        phoneZalo: document.getElementById('phoneZalo').value.trim(),
+        roleTeam: document.getElementById('roleTeam').value.trim(),
+        organization: document.getElementById('organization').value.trim(),
+        location: document.getElementById('location').value,
+        sessionPreference: document.getElementById('sessionPreference').value,
+        joinMode: document.getElementById('joinMode').value,
+        aiTools: getCheckedValues('aiTools'),
+        aiToolsOther: document.getElementById('aiToolsOther').value.trim(),
+        aiUseCases: getCheckedValues('aiUseCases'),
+        aiUseCasesOther: document.getElementById('aiUseCasesOther').value.trim(),
+        satisfaction: document.getElementById('satisfaction').value.trim(),
+        frustrations: document.getElementById('frustrations').value.trim(),
+        expectation: document.getElementById('expectation').value.trim(),
+        concreteTask: document.getElementById('concreteTask').value.trim(),
+        budgetRange: document.getElementById('budgetRange').value,
+        preferredOutput: document.getElementById('preferredOutput').value,
+        consentEmail: document.getElementById('consentEmail').checked ? 'yes' : '',
+        website: document.getElementById('website').value,
+      };
+    }
+
+    function setResult(type, message) {
+      resultBox.className = `result ${type || ''}`.trim();
+      resultBox.textContent = message;
+    }
+
+    function formatDraft(payload) {
+      return [
+        'AI Agent Workshop - phản hồi form',
+        `Họ tên: ${payload.fullName}`,
+        `Email: ${payload.email}`,
+        `SĐT/Zalo: ${payload.phoneZalo}`,
+        `Vai trò/team: ${payload.roleTeam}`,
+        `Đơn vị: ${payload.organization}`,
+        `Khu vực: ${payload.location}`,
+        `Lịch mong muốn: ${payload.sessionPreference}`,
+        `Hình thức: ${payload.joinMode}`,
+        `Công cụ AI: ${(payload.aiTools || []).join(', ')} ${payload.aiToolsOther}`,
+        `Use case: ${(payload.aiUseCases || []).join(', ')} ${payload.aiUseCasesOther}`,
+        `Điều hài lòng: ${payload.satisfaction}`,
+        `Điều gây khó chịu: ${payload.frustrations}`,
+        `Kỳ vọng: ${payload.expectation}`,
+        `Bài toán thật: ${payload.concreteTask}`,
+        `Budget: ${payload.budgetRange}`,
+        `Output mong muốn: ${payload.preferredOutput}`,
+      ].join('\n');
+    }
+
+    async function postPayload(payload) {
+      if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes('PASTE_APPS_SCRIPT')) {
+        throw new Error('Chưa cấu hình APPS_SCRIPT_URL trong index.html.');
+      }
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000);
+      try {
+        const response = await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          },
+          body: new URLSearchParams({
+            payload: JSON.stringify(payload),
+          }),
+          signal: controller.signal,
+        });
+        const data = await response.json();
+        if (!data.ok) {
+          throw new Error(data.error || 'Apps Script endpoint returned an error.');
+        }
+        return data;
+      } finally {
+        clearTimeout(timeoutId);
+      }
+    }
+
+    function saveLocal(payload, synced, syncError) {
+      try {
+        const key = 'aiWorkshopIntakeDrafts';
+        const items = JSON.parse(localStorage.getItem(key) || '[]');
+        items.push({
+          ...payload,
+          synced,
+          syncError,
+          savedAt: new Date().toISOString(),
+        });
+        localStorage.setItem(key, JSON.stringify(items));
+      } catch (err) {
+        console.warn('Local fallback save failed:', err);
+      }
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (!form.reportValidity()) {
+        setResult('warn', 'Vui lòng điền các trường bắt buộc trước khi gửi.');
+        return;
+      }
+
+      const payload = buildPayload();
+      submitButton.disabled = true;
+      submitButton.textContent = 'Đang gửi...';
+      setResult('', 'Đang ghi vào Google Sheet và gửi email xác nhận.');
+
+      try {
+        const data = await postPayload(payload);
+        saveLocal(payload, true, '');
+        setResult('ok', `${data.message || 'Đã gửi thành công.'} Mã phản hồi: ${data.submissionId || payload.submissionId}`);
+        form.reset();
+      } catch (err) {
+        saveLocal(payload, false, err.message || String(err));
+        setResult('err', `Chưa gửi được lên Google Sheet/email: ${err.message || err}. Bản nháp đã lưu tạm trong trình duyệt.`);
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Gửi thông tin';
+      }
+    });
+
+    copyButton.addEventListener('click', async () => {
+      const payload = buildPayload();
+      const draft = formatDraft(payload);
+      try {
+        await navigator.clipboard.writeText(draft);
+        setResult('ok', 'Đã copy bản nháp vào clipboard.');
+      } catch (err) {
+        setResult('warn', 'Không copy được tự động. Bạn có thể chọn và copy nội dung từ form.');
+      }
+    });
+  </script>
+</body>
+</html>

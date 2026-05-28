@@ -34,6 +34,11 @@ Bộ công cụ tự động hóa toàn diện giúp trích xuất tài liệu, 
 - Kịch bản test Gemini nằm ở `Gemini_Test/GEMINI_TEST_SCRIPT_20260527.md`.
 - Raw captures và chat analysis chứa dữ liệu riêng tư mặc định không commit lên GitHub.
 
+## 📝 AI Workshop Intake Form
+- Form thu thập nhu cầu trước buổi chia sẻ AI Agent nằm ở `AI_Workshop_Form/`.
+- Backend Google Apps Script ghi vào Google Sheet và gửi email xác nhận: `AI_Workshop_Form/apps_script_ai_workshop.gs`.
+- Kịch bản Gemini/browser UAT: `Gemini_Test/GEMINI_BROWSER_UAT_20260528_AI_WORKSHOP_FORM.md`.
+
 ## ⚙️ Cấu hình GitHub
 Toàn bộ mã nguồn được duy trì tại repository: `vuhoang2708/ces-academy-automation`.
 
